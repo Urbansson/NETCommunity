@@ -22,7 +22,26 @@ namespace NetCommunity.Controllers
         // GET: Send
         public ActionResult Index()
         {
-            return View();
+            var UserList = new List<string>();
+
+
+            var UserNames = db.Users.Select(x => new SelectListItem{
+                                                            Text = x.UserName,
+                                                            Value = x.UserName
+            });
+
+
+            SendMessageViewModel model = new SendMessageViewModel();
+
+            model.Users = new SelectList(UserNames, "Value", "Text");
+
+            foreach(SelectListItem useritem in model.Users){
+                System.Diagnostics.Debug.WriteLine(useritem.Text);
+                System.Diagnostics.Debug.WriteLine(useritem.Value);
+            }
+
+
+            return View(model);
         }
 
         // POST: Send/Create
