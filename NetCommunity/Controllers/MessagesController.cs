@@ -30,7 +30,7 @@ namespace NetCommunity.Controllers
             var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessagesViewModel
             {
                 Sender = m.Key.UserName,
-                NumberOfMessages = m.Count()
+                NumberOfMessages = m.Where(k => k.IsRead == false).Count()
             });
 
             return View(UserMessages);
@@ -83,11 +83,16 @@ namespace NetCommunity.Controllers
                 return HttpNotFound();
             }
 
+            Message.IsRead = true;
+            db.SaveChanges();
+
             DisplayMessageViewModel MessageView = new DisplayMessageViewModel();
             MessageView.Sender = Message.Sender.UserName;
             MessageView.Title = Message.Title;
             MessageView.Content = Message.Content;
             MessageView.Time = Message.Time;
+
+
 
             return View(MessageView);
 

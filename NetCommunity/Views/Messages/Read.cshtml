@@ -8,23 +8,26 @@
 
 
 <div>
-    <h5><strong>Message from:</strong> @Html.DisplayFor(model => model.Sender)<br>
-    <strong>Title:</strong> @Html.DisplayFor(model => model.Title)<br>
-    <strong>Arrived:</strong> @Html.DisplayFor(model => model.Time)
-    </h5>
+
+
+    
+    <h2><strong>Message from:</strong> @Html.DisplayFor(model => model.Sender)<br>    </h2>
+    <h3><strong>Title:</strong> @Html.DisplayFor(model => model.Title)<br></h3>
+    <h4><strong>Arrived:</strong> @Html.DisplayFor(model => model.Time)</h4>
+
       <hr />
   
     <div class="dl-horizontal">
 
-        <h3> @Html.DisplayNameFor(model => model.Content)</h3>
-        <br />
             @Html.DisplayFor(model => model.Content)
 
-
     </div>
+
+
 </div>
-<br />
-<br />
-<p>
-    @Html.ActionLink("Back to User Messages", "UserMessages", new { user = Model.Sender })
-</p>
+<br/>
+    <p>
+       @Html.ActionLink("Back", "UserMessages", new { user = Model.Sender }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete", "UserMessages", new { user = Model.Sender }, new { @class = "btn btn-danger" })
+    </p>
+

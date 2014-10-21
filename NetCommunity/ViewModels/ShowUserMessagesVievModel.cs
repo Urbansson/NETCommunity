@@ -33,4 +33,8 @@ namespace NetCommunity.ViewModels
         public DateTime Time { get; set; }
 
     }
+
+
+
+
 }
