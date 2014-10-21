@@ -18,5 +18,7 @@ namespace NetCommunity.ViewModels
         [Display(Name = "Unread Messages")]
         public int NumberOfMessages { get; set; }
 
+
+
     }
 }

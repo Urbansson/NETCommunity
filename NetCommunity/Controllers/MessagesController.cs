@@ -26,21 +26,71 @@ namespace NetCommunity.Controllers
         {
 
             var currentUser = db.Users.Find(User.Identity.GetUserId());
-            /*
-            var messages = db.Messages.Where(u => u.ReciverId == currentUser.Id).Select(m => new UserMessagesViewModel
-            {
-                Sender = m.Sender.UserName,
-                NumberOfMessages = db.Messages.Where(d => d.Sender.Id == m.Sender.Id && d.ReciverId == currentUser.Id).Count()
-            });
-            */
 
-            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessagesViewModel
+            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessagesViewModel
             {
                 Sender = m.Key.UserName,
                 NumberOfMessages = m.Count()
             });
 
             return View(UserMessages);
+        }
+
+
+        public ActionResult UserMessages(String user)
+        {
+            System.Diagnostics.Debug.WriteLine("user");
+
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+            System.Diagnostics.Debug.WriteLine(currentUser.UserName);
+
+            var sendingUser = db.Users.Where(u => u.UserName.Equals(user)).FirstOrDefault();
+
+            System.Diagnostics.Debug.WriteLine(sendingUser.UserName);
+
+            if (sendingUser == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var Messages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.SenderId == sendingUser.Id).Select(m => new ShowUserMessagesViewModel
+            { 
+                Id = m.Id,
+                IsRead = m.IsRead,
+                Sender = m.Sender.UserName,
+                Title = m.Title,
+                Time = m.Time
+            });
+
+            if (Messages == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(Messages);
+        }
+
+
+        public ActionResult Read(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Message Message = db.Messages.Find(id);
+
+            if (Message == null)
+            {
+                return HttpNotFound();
+            }
+
+            DisplayMessageViewModel MessageView = new DisplayMessageViewModel();
+            MessageView.Sender = Message.Sender.UserName;
+            MessageView.Title = Message.Title;
+            MessageView.Content = Message.Content;
+            MessageView.Time = Message.Time;
+
+            return View(MessageView);
+
         }
 
         /*
@@ -157,27 +207,5 @@ namespace NetCommunity.Controllers
             base.Dispose(disposing);
         }
         
-        public ActionResult Read(int? id)
-        {
-                    if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Message Message = db.Messages.Find(id);
-
-            if (Message == null)
-            {
-                return HttpNotFound();
-            }
-            
-            DisplayMessageViewModel MessageView = new DisplayMessageViewModel();
-            MessageView.Sender = Message.Sender.UserName;
-            MessageView.Title = Message.Title;
-            MessageView.Content = Message.Content;
-            MessageView.Time = Message.Time;
-
-            return View(MessageView);
-          
-        }
     }
 }

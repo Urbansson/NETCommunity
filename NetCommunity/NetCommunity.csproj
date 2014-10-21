@@ -206,8 +206,8 @@
     <Compile Include="ViewModels\LoginsViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModels.cs" />
     <Compile Include="ViewModels\DisplayMessageViewModel.cs" />
+    <Compile Include="ViewModels\ShowUserMessagesVievModel.cs" />
     <Compile Include="ViewModels\UserMessagesViewModel.cs" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -270,6 +270,7 @@
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\Read.cshtml" />
+    <Content Include="Views\Messages\UserMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

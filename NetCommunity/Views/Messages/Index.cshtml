@@ -5,11 +5,8 @@
 }
 
 
-<h2>Index</h2>
+<h2>Messages</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -31,7 +28,7 @@
             @Html.DisplayFor(modelItem => item.NumberOfMessages)
         </td>
         <td>
-            @Html.ActionLink("More", "Users", new { id = item.Sender }) 
+            @Html.ActionLink("More", "UserMessages", new { user = item.Sender }) 
         </td>
 </tr>
 }

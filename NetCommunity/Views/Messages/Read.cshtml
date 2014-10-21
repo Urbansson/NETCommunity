@@ -12,23 +12,19 @@
     <strong>Title:</strong> @Html.DisplayFor(model => model.Title)<br>
     <strong>Arrived:</strong> @Html.DisplayFor(model => model.Time)
     </h5>
-    <!--
       <hr />
   
-    <dl class="dl-horizontal">
-        -->
-    
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+    <div class="dl-horizontal">
 
-        <dd>
+        <h3> @Html.DisplayNameFor(model => model.Content)</h3>
+        <br />
             @Html.DisplayFor(model => model.Content)
-        </dd>
 
-    </dl>
+
+    </div>
 </div>
+<br />
+<br />
 <p>
-    
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to User Messages", "UserMessages", new { user = Model.Sender })
 </p>
