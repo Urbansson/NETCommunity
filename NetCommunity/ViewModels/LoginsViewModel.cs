@@ -12,5 +12,8 @@ namespace NetCommunity.ViewModels
         public int Logins { get; set; }
         public String UserName { get; set; }
 
+
+
+
     }
 }
