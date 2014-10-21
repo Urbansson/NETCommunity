@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+
+namespace NetCommunity.ViewModels
+{
+    public class DisplayMessageViewModel
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Sender")]
+        public string Sender { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Message")]
+        public string Content { get; set; }
+        
+        [Display(Name = "Recieved Time")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
+        public DateTime Time { get; set; }
+
+    }
+}

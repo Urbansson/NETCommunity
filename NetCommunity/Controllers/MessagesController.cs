@@ -156,5 +156,28 @@ namespace NetCommunity.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        public ActionResult Read(int? id)
+        {
+                    if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Message Message = db.Messages.Find(id);
+
+            if (Message == null)
+            {
+                return HttpNotFound();
+            }
+            
+            DisplayMessageViewModel MessageView = new DisplayMessageViewModel();
+            MessageView.Sender = Message.Sender.UserName;
+            MessageView.Title = Message.Title;
+            MessageView.Content = Message.Content;
+            MessageView.Time = Message.Time;
+
+            return View(MessageView);
+          
+        }
     }
 }
