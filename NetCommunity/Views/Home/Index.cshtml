@@ -1,0 +1,43 @@
+﻿@model NetCommunity.ViewModels.LoginsViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Välkommen till Nätverket</h1>
+    <h2>@Html.DisplayFor(model => model.UserName)</h2>
+
+    @if (Model.Logins >= 1) { 
+    
+        <p>Du var senast här @Html.DisplayFor(model => model.LoginTime)</p>
+
+        <p>Du har vart här @Html.DisplayFor(model => model.Logins) gånger den senaste månaden! </p>
+    }
+    else
+    {
+        <p>Detta är första gången du är här!</p>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Skicka Meddelande</h2>
+        <p>
+            Info om att skicka.
+        </p>
+        <p><a class="btn btn-default" @Html.ActionLink("Skicka", "Index", "Send")</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Läs meddelande</h2>
+        <p>            Info om att Läsa.</p>
+        <!--<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Läs &raquo;</a></p>-->
+        <p><a class="btn btn-default" @Html.ActionLink("Läs", "Index", "Recieve")</a></p>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Grupper</h2>
+        <p>Info om grupper.</p>
+        <p><a class="btn btn-default disabled" href="http://go.microsoft.com/fwlink/?LinkId=301867">Kommer snart &raquo;</a></p>
+    </div>
+</div>
