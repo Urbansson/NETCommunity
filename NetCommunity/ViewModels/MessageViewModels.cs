@@ -31,13 +31,11 @@ namespace NetCommunity.ViewModels
         [Display(Name = "Message")]
         public String Content { get; set; }
 
-
         [Required]
         [EmailAddress]
         [Display(Name = "Reciver")]
         public String Reciver { get; set; }
         public IEnumerable<SelectListItem> Users { get; set; }
-
 
     }
 

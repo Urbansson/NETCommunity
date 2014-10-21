@@ -1,8 +1,9 @@
-﻿@model IEnumerable<NetCommunity.Models.Message>
+﻿@model IEnumerable<NetCommunity.ViewModels.UserMessagesViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
+
 
 <h2>Index</h2>
 
@@ -12,52 +13,27 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Reciver.Email)
+            @Html.DisplayNameFor(model => model.Sender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sender.Email)
+            @Html.DisplayNameFor(model => model.NumberOfMessages)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsRead)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Reciver.Email)
+            @Html.DisplayFor(modelItem => item.Sender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Sender.Email)
+            @Html.DisplayFor(modelItem => item.NumberOfMessages)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.ActionLink("More", "Users", new { id = item.Sender }) 
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsRead)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+</tr>
 }
 
 </table>

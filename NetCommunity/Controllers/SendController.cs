@@ -15,6 +15,7 @@ using NetCommunity.ViewModels;
 
 namespace NetCommunity.Controllers
 {
+    [Authorize]
     public class SendController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -35,10 +36,10 @@ namespace NetCommunity.Controllers
 
             model.Users = new SelectList(UserNames, "Value", "Text");
 
-            foreach(SelectListItem useritem in model.Users){
-                System.Diagnostics.Debug.WriteLine(useritem.Text);
-                System.Diagnostics.Debug.WriteLine(useritem.Value);
-            }
+            //foreach(SelectListItem useritem in model.Users){
+            //    System.Diagnostics.Debug.WriteLine(useritem.Text);
+            //    System.Diagnostics.Debug.WriteLine(useritem.Value);
+          //  }
 
 
             return View(model);
@@ -70,7 +71,7 @@ namespace NetCommunity.Controllers
 
                 dbMessage.IsRead = false;
                 dbMessage.Time = DateTime.Now;
-        
+
                 db.Messages.Add(dbMessage);
                 db.SaveChanges();
                 

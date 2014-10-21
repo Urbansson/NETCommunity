@@ -7,9 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NetCommunity.Models;
+using NetCommunity.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace NetCommunity.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,10 +24,26 @@ namespace NetCommunity.Controllers
         // GET: Messages
         public ActionResult Index()
         {
-            var messages = db.Messages.Include(m => m.Reciver).Include(m => m.Sender);
-            return View(messages.ToList());
+
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+            /*
+            var messages = db.Messages.Where(u => u.ReciverId == currentUser.Id).Select(m => new UserMessagesViewModel
+            {
+                Sender = m.Sender.UserName,
+                NumberOfMessages = db.Messages.Where(d => d.Sender.Id == m.Sender.Id && d.ReciverId == currentUser.Id).Count()
+            });
+            */
+
+            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessagesViewModel
+            {
+                Sender = m.Key.UserName,
+                NumberOfMessages = m.Count()
+            });
+
+            return View(UserMessages);
         }
 
+        /*
         // GET: Messages/Details/5
         public ActionResult Details(int? id)
         {
@@ -125,7 +147,7 @@ namespace NetCommunity.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        */
         protected override void Dispose(bool disposing)
         {
             if (disposing)
