@@ -14,6 +14,7 @@ namespace NetCommunity.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //Something to change
         // GET: Messages
         public ActionResult Index()
         {
