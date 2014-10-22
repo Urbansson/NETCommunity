@@ -23,24 +23,16 @@ namespace NetCommunity.Controllers
         // GET: Send
         public ActionResult Index()
         {
-            var UserList = new List<string>();
-
 
             var UserNames = db.Users.Select(x => new SelectListItem{
                                                             Text = x.UserName,
-                                                            Value = x.UserName
+                                                            Value = x.Id
             });
 
             SendMessageViewModel model = new SendMessageViewModel();
 
             model.Users = new SelectList(UserNames, "Value", "Text");
 
-            /*
-            if (sendMessageSuccess !=  null)
-            {
-                model.SuccessMessage = sendMessageSuccess;
-            }
-            */
             return View(model);
         }
 
@@ -49,11 +41,14 @@ namespace NetCommunity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Title,Content,Reciver")] SendMessageViewModel message)
+        public ActionResult Index([Bind(Include = "Title,Content,Reciver,SelectedUsers")] SendMessageViewModel message)
         {
-            var Sender = db.Users.Find(User.Identity.GetUserId());
-
-            //var Reciver = db.Users.Where(u => u.UserName.Equals(message.Reciver)).First();
+            foreach (String x in message.SelectedUsers)
+            {
+                System.Diagnostics.Debug.WriteLine(x);
+            }
+   
+            /*var Sender = db.Users.Find(User.Identity.GetUserId());
 
             var Reciver = (ApplicationUser)null;
             Reciver = db.Users.SingleOrDefault(u => u.UserName.Equals(message.Reciver));
@@ -77,20 +72,18 @@ namespace NetCommunity.Controllers
 
                 db.SaveChanges();
 
+                //string output = String.Format("Message number {0} have been sent to {1},{2}", dbMessage.Id, dbMessage.Reciver.UserName, dbMessage.Time);
 
-                string output = String.Format("Message number {0} have been sent to {1},{2}", dbMessage.Id, dbMessage.Reciver, dbMessage.Time);
-
-
-                System.Diagnostics.Debug.WriteLine(output);
                 return RedirectToAction("Index");
             }
 
             if (Reciver == null)
                 ModelState.AddModelError("notFound", "Reciver was not found");
 
-            return View(message);
-        }
+            return View(message);*/
+            return RedirectToAction("Index");
 
+        }
 
         protected override void Dispose(bool disposing)
         {
