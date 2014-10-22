@@ -21,10 +21,16 @@ namespace NetCommunity.ViewModels
         [Display(Name = "Message")]
         public String Content { get; set; }
 
-        [Required]
         [Display(Name = "Users")]
         public IEnumerable<SelectListItem> Users { get; set; }
         public IEnumerable<String> SelectedUsers { get; set; }
+
+        [Display(Name = "Groups")]
+        public IEnumerable<SelectListItem> Groups { get; set; }
+        public IEnumerable<String> SelectedGroups { get; set; }
+
+        [Display(Name = "Success")]
+        public String SendSuccess { get; set; }
 
     }
 }

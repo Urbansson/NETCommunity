@@ -1,0 +1,28 @@
+﻿@model NetCommunity.ViewModels.SendSuccessViewModel
+
+
+@{
+    ViewBag.Title = "SuccessS";
+}
+
+<div>
+
+
+
+    <h2><strong>Success</strong> </h2>
+
+
+    <hr />
+    <div class="dl-horizontal">
+        <h4>@Html.DisplayFor(m => m.Message)</h4> 
+    </div>
+
+
+</div>
+<br />
+
+
+<p>
+            @Html.ActionLink("Back", "Index", "Send")
+</p>
+

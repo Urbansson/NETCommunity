@@ -229,19 +229,25 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\DisplayMessageViewModel.cs" />
+    <Compile Include="ViewModels\SendSuccessViewModel.cs" />
     <Compile Include="ViewModels\ShowUserMessagesVievModel.cs" />
     <Compile Include="ViewModels\UserMessagesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\chosen-sprite%402x.png" />
+    <Content Include="images\chosen-sprite.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\chosen.proto.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -292,6 +298,7 @@
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\Details.cshtml" />
     <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Send\success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
