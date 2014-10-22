@@ -195,6 +195,10 @@
     <Compile Include="Migrations\201410201129334_addeddata.Designer.cs">
       <DependentUpon>201410201129334_addeddata.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410220841225_MessageCounters.cs" />
+    <Compile Include="Migrations\201410220841225_MessageCounters.Designer.cs">
+      <DependentUpon>201410220841225_MessageCounters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410201129334_addeddata.resx">
       <DependentUpon>201410201129334_addeddata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410220841225_MessageCounters.resx">
+      <DependentUpon>201410220841225_MessageCounters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

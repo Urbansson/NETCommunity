@@ -26,8 +26,18 @@
 
 </div>
 <br/>
+
+<p class="error">@ViewBag.ErrorMessage</p>
+
     <p>
-       @Html.ActionLink("Back", "UserMessages", new { user = Model.Sender }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "UserMessages", new { user = Model.Sender }, new { @class = "btn btn-danger" })
+        @using (Html.BeginForm("Delete", "Messages", new {  id = Model.Id}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Back", "UserMessages", new { user = Model.Sender }, new { @class = "btn btn-default" })
+                <input type="submit" value="Delete" class="btn btn-danger" /> 
+            </div>
+        }
     </p>
 

@@ -8,6 +8,11 @@ namespace NetCommunity.ViewModels
 {
     public class DisplayMessageViewModel
     {
+
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Sender")]
@@ -26,6 +31,11 @@ namespace NetCommunity.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Error")]
+        public string ErrorMessage { get; set; }
 
     }
 }
