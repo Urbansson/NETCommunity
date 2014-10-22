@@ -33,11 +33,16 @@ namespace NetCommunity.Controllers
                                                             Value = x.UserName
             });
 
-
             SendMessageViewModel model = new SendMessageViewModel();
 
             model.Users = new SelectList(UserNames, "Value", "Text");
 
+            /*
+            if (sendMessageSuccess !=  null)
+            {
+                model.SuccessMessage = sendMessageSuccess;
+            }
+            */
             return View(model);
         }
 
@@ -76,15 +81,22 @@ namespace NetCommunity.Controllers
                 dbMessage.Time = DateTime.Now;
 
                 db.Messages.Add(dbMessage);
+
+                Reciver.TotalMessages += 1;
+
                 db.SaveChanges();
+
 
                 string output = String.Format("Message number {0} have been sent to {1},{2}", dbMessage.Id, dbMessage.Reciver, dbMessage.Time);
 
+
+                System.Diagnostics.Debug.WriteLine(output);
                 return RedirectToAction("Index");
             }
 
             if (Reciver == null)
                 ModelState.AddModelError("notFound", "Reciver was not found");
+
             return View(message);
         }
 

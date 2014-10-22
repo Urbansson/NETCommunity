@@ -29,11 +29,11 @@ namespace NetCommunity.ViewModels
 
         //Help parameters to render view
 
-        public String isValid { get; set; }
+        public String SuccessMessage { get; set; }
 
         public SendMessageViewModel()
         {
-            isValid = null;
+            SuccessMessage = null;
         }
 
     }

@@ -21,6 +21,10 @@ namespace NetCommunity.Models
             return userIdentity;
         }
 
+        public int TotalMessages { get; set; }
+        public int ReadMessages { get; set; }
+        public int RemovedMessages { get; set; }
+
         // Navigation property
         public virtual ICollection<Login> NrOfLogins { get; set; }
         
