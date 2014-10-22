@@ -13,6 +13,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
+///Controller for handling messages on site
+
 namespace NetCommunity.Controllers
 {
     [Authorize]
@@ -36,7 +38,11 @@ namespace NetCommunity.Controllers
             return View(UserMessages);
         }
 
-
+        /// <summary>
+        /// Takes a username as argument and returns a view with the users inbox
+        /// </summary>
+        /// <param name="user">The registred email of the user</param>
+        /// <returns>The a view of the inbox for the user</returns>
         public ActionResult UserMessages(String user)
         {
             System.Diagnostics.Debug.WriteLine("user");
@@ -69,7 +75,11 @@ namespace NetCommunity.Controllers
             return View(Messages);
         }
 
-
+        /// <summary>
+        /// To read a specified message
+        /// </summary>
+        /// <param name="id">The id of the message we want to read</param>
+        /// <returns>Returns a view showing the message</returns>
         public ActionResult Read(int? id)
         {
             if (id == null)
@@ -203,6 +213,11 @@ namespace NetCommunity.Controllers
             return RedirectToAction("Index");
         }
         */
+
+        /// <summary>
+        /// Method the clear the database connection
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

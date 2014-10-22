@@ -7,6 +7,9 @@ using System.Web.Mvc;
 
 namespace NetCommunity.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for sending messages
+    /// </summary>
     public class SendMessageViewModel
     {
         [Required]

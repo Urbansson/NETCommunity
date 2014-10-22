@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetCommunity.ViewModels
 {
+    /// <summary>
+    /// Recieved messages from users and how many messages unread messages from each sender.
+    /// </summary>
     public class UserMessagesViewModel
     {
         [Required]

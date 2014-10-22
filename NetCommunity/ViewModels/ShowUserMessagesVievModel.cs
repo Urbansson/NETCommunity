@@ -6,6 +6,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetCommunity.ViewModels
 {
+
+    /// <summary>
+    /// A viewmodel to used to show all messages in inbox. Does not show content of message.
+    /// </summary>
     public class ShowUserMessagesViewModel
     {
 

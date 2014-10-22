@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetCommunity.ViewModels
 {
+    /// <summary>
+    /// A viewmodel to get data when we want to read a single message and its content
+    /// </summary>
     public class DisplayMessageViewModel
     {
         [Required]

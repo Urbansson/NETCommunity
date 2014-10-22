@@ -13,6 +13,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NetCommunity.ViewModels;
 
+/// Controller for sending messages between users
+
 namespace NetCommunity.Controllers
 {
     [Authorize]
@@ -39,9 +41,16 @@ namespace NetCommunity.Controllers
             return View(model);
         }
 
+        
+        
         // POST: Send/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Sends a message to another user
+        /// </summary>
+        /// <param name="message">A viewmodel created from view containing sender, reciever, title of message, message, and a timestamp</param>
+        /// <returns>A view back to index if everything is ok, else a view back to message send</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "Title,Content,Reciver")] SendMessageViewModel message)

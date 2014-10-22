@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetCommunity.Models
 {
+    /// <summary>
+    /// A model for a message in our system.
+    /// A message has a sender, a reciecer, a title, a content and a timestamp from when it is sent
+    /// </summary>
     public class Message
     
     {

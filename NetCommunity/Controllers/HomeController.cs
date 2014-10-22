@@ -13,6 +13,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NetCommunity.ViewModels;
 
+
+/// Controller to for passing user to relevant page on site
+/// 
 namespace NetCommunity.Controllers
 {
 

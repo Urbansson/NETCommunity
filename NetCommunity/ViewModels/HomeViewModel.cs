@@ -5,6 +5,10 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 namespace NetCommunity.ViewModels
 {
+
+    /// <summary>
+    /// Viewmodel for the homepage
+    /// </summary>
     public class HomeViewModel
     {
         [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
