@@ -22,19 +22,9 @@ namespace NetCommunity.ViewModels
         public String Content { get; set; }
 
         [Required]
-        [EmailAddress]
-        [Display(Name = "Reciver")]
-        public String Reciver { get; set; }
+        [Display(Name = "Users")]
         public IEnumerable<SelectListItem> Users { get; set; }
-
-        //Help parameters to render view
-
-        public String SuccessMessage { get; set; }
-
-        public SendMessageViewModel()
-        {
-            SuccessMessage = null;
-        }
+        public IEnumerable<String> SelectedUsers { get; set; }
 
     }
 }

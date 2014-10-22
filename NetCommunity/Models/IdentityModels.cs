@@ -27,7 +27,9 @@ namespace NetCommunity.Models
 
         // Navigation property
         public virtual ICollection<Login> NrOfLogins { get; set; }
-        
+
+        public virtual ICollection<Group> Groups { get; set; }
+
         public virtual ICollection<Message> SentMessages { get; set; }
 
         public virtual ICollection<Message> RecivedMessages { get; set; }
@@ -38,6 +40,7 @@ namespace NetCommunity.Models
             //RecivedMessages = new List<Message>();
             SentMessages = new List<Message>();
             RecivedMessages = new List<Message>();
+            Groups = new List<Group>();
         }
     }
 
@@ -57,6 +60,8 @@ namespace NetCommunity.Models
         }
         public DbSet<Login> NrOfLogins { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Group> Groups { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
