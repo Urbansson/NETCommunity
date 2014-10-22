@@ -36,6 +36,12 @@ namespace NetCommunity.Controllers
             return View(UserMessages);
         }
 
+        /// <summary>
+        /// Takes a username as argument and returns a view with the users inbox
+        /// </summary>
+        /// <param name="user">The registred email of the user, and a control argument to see if delete failed </param>
+        /// <returns>The a view of the inbox for the user</returns>
+
 
         public ActionResult UserMessages(String user)
         {
@@ -69,6 +75,19 @@ namespace NetCommunity.Controllers
             return View(Messages);
         }
 
+        /// <summary>
+        /// Takes a username as argument and returns a view with the users inbox
+        /// </summary>
+        /// <param name="user">The registred email of the user, and a control argument to see if delete failed </param>
+        /// <returns>The a view of the inbox for the user</returns>
+
+
+        /// <summary>
+        /// Reads a single message and returns a viewmodel of it 
+        /// </summary>
+        /// <param name="id">Id of the message to read</param>
+        /// <param name="saveChangesError">Control argument to see if delete failed, default: false</param>
+        /// <returns>Returns a viewmodel of relevant data</returns>
 
         public ActionResult Read(int? id, bool? saveChangesError = false)
         {
@@ -106,6 +125,12 @@ namespace NetCommunity.Controllers
 
         }
 
+
+        /// <summary>
+        /// Deletes a message
+        /// </summary>
+        /// <param name="id">The message to delete</param>
+        /// <returns>A view for index page</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
