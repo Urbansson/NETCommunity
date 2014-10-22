@@ -36,12 +36,6 @@ namespace NetCommunity.Controllers
 
             model.Users = new SelectList(UserNames, "Value", "Text");
 
-            //foreach(SelectListItem useritem in model.Users){
-            //    System.Diagnostics.Debug.WriteLine(useritem.Text);
-            //    System.Diagnostics.Debug.WriteLine(useritem.Value);
-          //  }
-
-
             return View(model);
         }
 
@@ -74,13 +68,14 @@ namespace NetCommunity.Controllers
 
                 db.Messages.Add(dbMessage);
                 db.SaveChanges();
-                
+
+                string output = String.Format("Message number {0} have been sent to {1},{2}", dbMessage.Id, dbMessage.Reciver, dbMessage.Time);
+
                 return RedirectToAction("Index");
             }
 
             if (Reciver == null)
                 ModelState.AddModelError("notFound", "Reciver was not found");
-
             return View(message);
         }
 

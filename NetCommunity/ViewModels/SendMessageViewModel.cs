@@ -7,19 +7,6 @@ using System.Web.Mvc;
 
 namespace NetCommunity.ViewModels
 {
-    public class MessageViewModels
-    {
-        public int Id { get; set; }
-        public String Title { get; set; }
-        public String Content { get; set; }
-        public Boolean IsRead { get; set; }
-        public DateTime SentTime { get; set; }
-
-        public String Sender { get; set; }
-        public String Reciver { get; set; }
-
-    }
-
     public class SendMessageViewModel
     {
         [Required]
@@ -37,6 +24,14 @@ namespace NetCommunity.ViewModels
         public String Reciver { get; set; }
         public IEnumerable<SelectListItem> Users { get; set; }
 
-    }
+        //Help parameters to render view
 
+        public String isValid { get; set; }
+
+        public SendMessageViewModel()
+        {
+            isValid = null;
+        }
+
+    }
 }

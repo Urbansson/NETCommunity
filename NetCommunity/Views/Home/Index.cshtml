@@ -1,4 +1,4 @@
-﻿@model NetCommunity.ViewModels.LoginsViewModel
+﻿@model NetCommunity.ViewModels.HomeViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -7,6 +7,8 @@
 <div class="jumbotron">
     <h1>Välkommen till Nätverket</h1>
     <h2>@Html.DisplayFor(model => model.UserName)</h2>
+
+    <p>Du har  @Html.DisplayFor(model => model.UnreadMessages) olästa medelanden </p>
 
     @if (Model.Logins >= 1) { 
     

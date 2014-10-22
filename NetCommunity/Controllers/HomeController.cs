@@ -23,29 +23,28 @@ namespace NetCommunity.Controllers
 
         public ActionResult Index()
         {
-            //System.Data.Entity.Database.SetInitializer(new MyInitializer());          
-            
+
+            var ViewModel = new HomeViewModel();
             var currentUser = db.Users.Find(User.Identity.GetUserId());
 
-            //var data = db.NrOfLogins.Where(d => (d.LoginTime.AddDays(30) > DateTime.Now) && d.User.Id == currentUser.Id);
-            var data = db.NrOfLogins.Where(d => d.User.Id == currentUser.Id);
-
-            var ViewModel = new LoginsViewModel();
-
+            var Logins = db.NrOfLogins.Where(d => d.User.Id == currentUser.Id);
             DateTime Last30Days = DateTime.Now.AddDays(-30);
+            ViewModel.Logins = Logins.Count(time => time.LoginTime >= Last30Days);
 
-            ViewModel.Logins = data.Count(time => time.LoginTime >= Last30Days);
+            int UnreadMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.IsRead == false).Count();
+
             try
             {
-                ViewModel.LoginTime = data.OrderByDescending(x => x.LoginTime).Skip(1).Take(1).FirstOrDefault().LoginTime;
+                ViewModel.LoginTime = Logins.OrderByDescending(x => x.LoginTime).Skip(1).Take(1).FirstOrDefault().LoginTime;
             }
             catch (NullReferenceException)
             {
                                 ViewModel.LoginTime = DateTime.Now;
 
             }
-            ViewModel.UserName = currentUser.UserName;
 
+            ViewModel.UserName = currentUser.UserName;
+            ViewModel.UnreadMessages = UnreadMessages;
 
 
             System.Diagnostics.Debug.WriteLine(ViewModel.Logins);
