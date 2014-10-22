@@ -15,7 +15,6 @@ namespace NetCommunity.ViewModels
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Sender")]

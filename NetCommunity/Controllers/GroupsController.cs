@@ -7,9 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NetCommunity.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using NetCommunity.ViewModels;
 
 namespace NetCommunity.Controllers
+
 {
+   [Authorize]
     public class GroupsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,7 +24,19 @@ namespace NetCommunity.Controllers
         // GET: Groups
         public ActionResult Index()
         {
-            return View(db.Groups.ToList());
+
+           var currentUser = db.Users.Find(User.Identity.GetUserId());
+
+            var groups = db.Groups.Select(g => new GroupVewModel
+            {
+                Name = g.Name,
+                Id = g.Id,
+                Description = g.Description,
+                NrOfMembers = g.ApplicationUsers.Count(),
+                Member = g.ApplicationUsers.Any(u => u.Id.Equals(currentUser.Id))
+            });
+
+            return View(groups.ToList());
         }
 
         // GET: Groups/Details/5
@@ -32,7 +51,13 @@ namespace NetCommunity.Controllers
             {
                 return HttpNotFound();
             }
-            return View(group);
+
+            GroupDetailsViewModel model = new GroupDetailsViewModel();
+            model.Name = group.Name;
+            model.Description = group.Description;
+            model.Members = group.ApplicationUsers.Select(name => (name.UserName)).ToList();
+
+            return View(model);
         }
 
         // GET: Groups/Create
@@ -40,17 +65,23 @@ namespace NetCommunity.Controllers
         {
             return View();
         }
-
         // POST: Groups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Group group)
+        public ActionResult Create([Bind(Include = "Name,Description")] GroupVewModel group)
         {
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+
             if (ModelState.IsValid)
             {
-                db.Groups.Add(group);
+                Group tmp = new Group();
+                tmp.Name = group.Name;
+                tmp.Description = group.Description;
+                tmp.ApplicationUsers.Add(currentUser);
+
+                db.Groups.Add(tmp);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -58,61 +89,44 @@ namespace NetCommunity.Controllers
             return View(group);
         }
 
-        // GET: Groups/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
-            return View(group);
-        }
-
-        // POST: Groups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Group group)
+        public ActionResult Join([Bind(Include = "Id")] GroupVewModel group)
         {
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+
             if (ModelState.IsValid)
             {
-                db.Entry(group).State = EntityState.Modified;
+                Group dbgroup = db.Groups.Find(group.Id);
+
+                dbgroup.ApplicationUsers.Add(currentUser);
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(group);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Leave([Bind(Include = "Id")] GroupVewModel group)
+        {
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+
+            if (ModelState.IsValid)
+            {
+                Group dbgroup = db.Groups.Find(group.Id);
+                dbgroup.ApplicationUsers.Remove(currentUser);
+
+                if (!dbgroup.ApplicationUsers.Any())
+                    db.Groups.Remove(dbgroup);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(group);
-        }
-
-        // GET: Groups/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
-            return View(group);
-        }
-
-        // POST: Groups/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Group group = db.Groups.Find(id);
-            db.Groups.Remove(group);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

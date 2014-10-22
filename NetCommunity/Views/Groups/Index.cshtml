@@ -1,10 +1,10 @@
-﻿@model IEnumerable<NetCommunity.Models.Group>
+﻿@model IEnumerable<NetCommunity.ViewModels.GroupVewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Groups</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,23 +18,54 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NrOfMembers)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NrOfMembers)
+            </td>
+            <td>
+                @if (!item.Member)
+                {
+                    using (Html.BeginForm("Join", "Groups", new { id = item.Id }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" })
+                                <input type="submit" value="Join" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("Leave", "Groups", new { id = item.Id }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" })
+                                <input type="submit" value="Leave" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                }
+            </td>
+
+        </tr>
+    }
 
 </table>

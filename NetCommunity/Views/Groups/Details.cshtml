@@ -1,4 +1,4 @@
-﻿@model NetCommunity.Models.Group
+﻿@model NetCommunity.ViewModels.GroupDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -26,9 +26,19 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Members)
+        </dt>
+        <dd>
+            @foreach (String Name in Model.Members)
+            {
+                @Html.Raw(Name.ToString())
+                <br />
+            }
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
