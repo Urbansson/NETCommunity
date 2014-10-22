@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SendController.cs" />
@@ -199,8 +200,25 @@
     <Compile Include="Migrations\201410220841225_MessageCounters.Designer.cs">
       <DependentUpon>201410220841225_MessageCounters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410221103026_Groups.cs" />
+    <Compile Include="Migrations\201410221103026_Groups.Designer.cs">
+      <DependentUpon>201410221103026_Groups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410221104127_Groups1.cs" />
+    <Compile Include="Migrations\201410221104127_Groups1.Designer.cs">
+      <DependentUpon>201410221104127_Groups1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410221111530_Groups2.cs" />
+    <Compile Include="Migrations\201410221111530_Groups2.Designer.cs">
+      <DependentUpon>201410221111530_Groups2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410221122351_Groups3.cs" />
+    <Compile Include="Migrations\201410221122351_Groups3.Designer.cs">
+      <DependentUpon>201410221122351_Groups3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Message.cs" />
@@ -269,6 +287,11 @@
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\Read.cshtml" />
     <Content Include="Views\Messages\UserMessages.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,6 +327,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410220841225_MessageCounters.resx">
       <DependentUpon>201410220841225_MessageCounters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410221103026_Groups.resx">
+      <DependentUpon>201410221103026_Groups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410221104127_Groups1.resx">
+      <DependentUpon>201410221104127_Groups1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410221111530_Groups2.resx">
+      <DependentUpon>201410221111530_Groups2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410221122351_Groups3.resx">
+      <DependentUpon>201410221122351_Groups3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
