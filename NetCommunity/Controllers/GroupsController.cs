@@ -27,7 +27,7 @@ namespace NetCommunity.Controllers
 
            var currentUser = db.Users.Find(User.Identity.GetUserId());
 
-            var groups = db.Groups.Select(g => new GroupVewModel
+            var groups = db.Groups.Select(g => new GroupViewModel
             {
                 Name = g.Name,
                 Id = g.Id,
@@ -70,7 +70,7 @@ namespace NetCommunity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Description")] GroupVewModel group)
+        public ActionResult Create([Bind(Include = "Name,Description")] GroupViewModel group)
         {
             var currentUser = db.Users.Find(User.Identity.GetUserId());
 
@@ -91,7 +91,7 @@ namespace NetCommunity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Join([Bind(Include = "Id")] GroupVewModel group)
+        public ActionResult Join([Bind(Include = "Id")] GroupViewModel group)
         {
             var currentUser = db.Users.Find(User.Identity.GetUserId());
 
@@ -111,7 +111,7 @@ namespace NetCommunity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Leave([Bind(Include = "Id")] GroupVewModel group)
+        public ActionResult Leave([Bind(Include = "Id")] GroupViewModel group)
         {
             var currentUser = db.Users.Find(User.Identity.GetUserId());
 

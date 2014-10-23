@@ -11,6 +11,23 @@ namespace NetCommunity.ViewModels
     /// </summary>
     public class UserMessagesViewModel
     {
+
+        public IEnumerable<MessageInfo> Messages { get; set; }
+
+
+        [Display(Name = "Total Number of Messages")]
+        public int TotalMessages { get; set; }
+
+        [Display(Name = "Read Messages")]
+        public int ReadMessages { get; set; }
+
+        [Display(Name = "Deleted Messages")]
+        public int DeletedMessages { get; set; }
+
+    }
+
+    public class MessageInfo
+    {
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Sender")]
@@ -21,4 +38,5 @@ namespace NetCommunity.ViewModels
         [Display(Name = "Unread Messages")]
         public int NumberOfMessages { get; set; }
     }
+
 }

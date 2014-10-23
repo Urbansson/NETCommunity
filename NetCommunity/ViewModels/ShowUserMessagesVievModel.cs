@@ -36,6 +36,15 @@ namespace NetCommunity.ViewModels
         [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
 
+        [Display(Name = "Total Number of Messages")]
+        public int TotalMessages { get; set; }
+
+        [Display(Name = "Read Messages")]
+        public int ReadMessages { get; set; }
+
+        [Display(Name = "Deleted Messages")]
+        public int DeletedMessages { get; set; }
+
     }
 
 

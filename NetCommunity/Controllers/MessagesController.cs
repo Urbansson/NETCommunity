@@ -27,13 +27,24 @@ namespace NetCommunity.Controllers
 
             var currentUser = db.Users.Find(User.Identity.GetUserId());
 
-            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessagesViewModel
+            UserMessagesViewModel model = new UserMessagesViewModel(); 
+
+            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new MessageInfo
             {
                 Sender = m.Key.UserName,
                 NumberOfMessages = m.Where(k => k.IsRead == false).Count()
             });
 
-            return View(UserMessages);
+
+
+            model.Messages = UserMessages;
+            model.TotalMessages = currentUser.TotalMessages;
+            model.ReadMessages = currentUser.ReadMessages;
+            model.DeletedMessages = currentUser.RemovedMessages;
+
+
+
+            return View(model);
         }
 
         /// <summary>
