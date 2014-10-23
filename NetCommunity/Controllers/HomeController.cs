@@ -24,6 +24,11 @@ namespace NetCommunity.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        /// <summary>
+        /// HOmepage gets username last login and number of logins past 30 days
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
 
@@ -58,21 +63,7 @@ namespace NetCommunity.Controllers
             return View(ViewModel);
         }
 
-        /*
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-         * */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

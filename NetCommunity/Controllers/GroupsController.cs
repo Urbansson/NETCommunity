@@ -22,6 +22,10 @@ namespace NetCommunity.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Groups
+       /// <summary>
+        /// Gets all groups from the database and formats them into a GroupViewModel
+       /// </summary>
+        /// <returns>GroupViewModel</returns>
         public ActionResult Index()
         {
 
@@ -40,6 +44,11 @@ namespace NetCommunity.Controllers
         }
 
         // GET: Groups/Details/5
+       /// <summary>
+       /// Shows the details of a group, name, description and members
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -65,9 +74,13 @@ namespace NetCommunity.Controllers
         {
             return View();
         }
+
         // POST: Groups/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       /// <summary>
+       /// Post method to create a Group
+       /// </summary>
+       /// <param name="group"></param>
+       /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Description")] GroupViewModel group)
@@ -89,6 +102,11 @@ namespace NetCommunity.Controllers
             return View(group);
         }
 
+       /// <summary>
+       /// Post method to Join a group
+       /// </summary>
+       /// <param name="group"></param>
+       /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Join([Bind(Include = "Id")] GroupViewModel group)
@@ -108,7 +126,11 @@ namespace NetCommunity.Controllers
             return View(group);
         }
 
-
+       /// <summary>
+       /// Post method to leave a group, if the person that leaves is the last one the group is deleted
+       /// </summary>
+       /// <param name="group"></param>
+       /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Leave([Bind(Include = "Id")] GroupViewModel group)

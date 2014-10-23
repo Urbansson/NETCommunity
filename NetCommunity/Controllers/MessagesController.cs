@@ -52,8 +52,6 @@ namespace NetCommunity.Controllers
         /// </summary>
         /// <param name="user">The registred email of the user, and a control argument to see if delete failed </param>
         /// <returns>The a view of the inbox for the user</returns>
-
-
         public ActionResult UserMessages(String user)
         {
 
@@ -87,12 +85,6 @@ namespace NetCommunity.Controllers
 
             return View(model);
         }
-
-        /// <summary>
-        /// Takes a username as argument and returns a view with the users inbox
-        /// </summary>
-        /// <param name="user">The registred email of the user, and a control argument to see if delete failed </param>
-        /// <returns>The a view of the inbox for the user</returns>
 
 
         /// <summary>

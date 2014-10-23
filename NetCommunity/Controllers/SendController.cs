@@ -22,6 +22,10 @@ namespace NetCommunity.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// Gets All users and the groups the current users groups
+        /// </summary>
+        /// <returns>returns a partaly filed SendMessageViewModel</returns>
         // GET: Send
         public ActionResult Index()
         {
@@ -59,6 +63,11 @@ namespace NetCommunity.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Success()
         {
 
@@ -81,7 +90,7 @@ namespace NetCommunity.Controllers
         /// Sends a message to another user
         /// </summary>
         /// <param name="message">A viewmodel created from view containing sender, reciever, title of message, message, and a timestamp</param>
-        /// <returns>A view back to index if everything is ok, else a view back to message send</returns>
+        /// <returns>A model back to index if everything is ok, else a view back to message send</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "Title,Content,Reciver,SelectedUsers,SelectedGroups")] SendMessageViewModel message)
