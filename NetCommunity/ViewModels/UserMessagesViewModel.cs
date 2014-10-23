@@ -12,8 +12,7 @@ namespace NetCommunity.ViewModels
     public class UserMessagesViewModel
     {
 
-        public IEnumerable<MessageInfo> Messages { get; set; }
-
+        public IEnumerable<UserMessageInfo> Messages { get; set; }
 
         [Display(Name = "Total Number of Messages")]
         public int TotalMessages { get; set; }
@@ -26,7 +25,7 @@ namespace NetCommunity.ViewModels
 
     }
 
-    public class MessageInfo
+    public class UserMessageInfo
     {
         [Required]
         [DataType(DataType.Text)]

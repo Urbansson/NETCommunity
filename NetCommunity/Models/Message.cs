@@ -19,18 +19,18 @@ namespace NetCommunity.Models
        [Key]
        public int Id { get; set; } // Id for Entity Framework and database
 
+       [Required]
        public String SenderId { get; set; }
 
        public virtual ApplicationUser Sender { get; set; }
 
+       [Required]
        public String ReciverId { get; set; }
 
        public virtual ApplicationUser Reciver { get; set; }
   
        [Required]
        public String Title { get; set; }
-
-       [Required]
        public String Content { get; set; }
        [Required]
        public Boolean IsRead { get; set; }

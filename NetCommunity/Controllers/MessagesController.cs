@@ -29,7 +29,7 @@ namespace NetCommunity.Controllers
 
             UserMessagesViewModel model = new UserMessagesViewModel(); 
 
-            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new MessageInfo
+            var UserMessages = db.Messages.Where(u => u.ReciverId == currentUser.Id).GroupBy(g => g.Sender).Select(m => new UserMessageInfo
             {
                 Sender = m.Key.UserName,
                 NumberOfMessages = m.Where(k => k.IsRead == false).Count()
@@ -56,24 +56,19 @@ namespace NetCommunity.Controllers
 
         public ActionResult UserMessages(String user)
         {
-            System.Diagnostics.Debug.WriteLine("user");
 
             var currentUser = db.Users.Find(User.Identity.GetUserId());
-            System.Diagnostics.Debug.WriteLine(currentUser.UserName);
 
             var sendingUser = db.Users.Where(u => u.UserName.Equals(user)).FirstOrDefault();
-
-            System.Diagnostics.Debug.WriteLine(sendingUser.UserName);
 
             if (sendingUser == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var Messages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.SenderId == sendingUser.Id).Select(m => new ShowUserMessagesViewModel
+            var Messages = db.Messages.Where(u => u.ReciverId == currentUser.Id && u.SenderId == sendingUser.Id).Select(m => new MessageInfo
             { 
                 Id = m.Id,
                 IsRead = m.IsRead,
-                Sender = m.Sender.UserName,
                 Title = m.Title,
                 Time = m.Time
             });
@@ -83,7 +78,14 @@ namespace NetCommunity.Controllers
                 return HttpNotFound();
             }
 
-            return View(Messages);
+            ShowUserMessagesViewModel model = new ShowUserMessagesViewModel();
+            model.Sender = sendingUser.UserName;
+            model.Messages = Messages;
+            model.TotalMessages = currentUser.TotalMessages;
+            model.ReadMessages = currentUser.ReadMessages;
+            model.DeletedMessages = currentUser.RemovedMessages;
+
+            return View(model);
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace NetCommunity.Controllers
 
         public ActionResult Read(int? id, bool? saveChangesError = false)
         {
-            var Sender = db.Users.Find(User.Identity.GetUserId());
+            var Reciver = db.Users.Find(User.Identity.GetUserId());
 
 
             if (id == null)
@@ -116,7 +118,12 @@ namespace NetCommunity.Controllers
                 return HttpNotFound();
             }
 
-            Sender.ReadMessages += 1;
+            if(Message.Reciver != Reciver)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Reciver.ReadMessages += 1;
             Message.IsRead = true;
             db.SaveChanges();
 
@@ -129,7 +136,7 @@ namespace NetCommunity.Controllers
 
             if (saveChangesError.GetValueOrDefault())
             {
-                MessageView.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+                MessageView.ErrorMessage = "Delete failed.";
             }
 
             return View(MessageView);
@@ -146,15 +153,22 @@ namespace NetCommunity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            try
-            {
-                Message message = db.Messages.Find(id);
-                db.Messages.Remove(message);
-                db.SaveChanges();
-            }
-            catch (DataException)
-            {
-                return RedirectToAction("Read", new { id = id, saveChangesError = true });
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+
+            if (db.Messages.Find(id).Reciver == currentUser) { 
+
+                try
+                {
+                    currentUser.RemovedMessages += 1;
+                    Message message = db.Messages.Find(id);
+                    db.Messages.Remove(message);
+                    db.SaveChanges();
+                }
+                catch (DataException)
+                {
+                    //fix tempdata
+                    return RedirectToAction("Read", new { id = id, saveChangesError = true });
+                }
             }
             return RedirectToAction("Index");
         }

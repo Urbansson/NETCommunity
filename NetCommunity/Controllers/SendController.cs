@@ -128,9 +128,13 @@ namespace NetCommunity.Controllers
                     foreach (String userId in AllRecivers)
                     {
                         Reciver = db.Users.Find(userId);
+                        Reciver.TotalMessages += 1;
+                        //db.SaveChanges();
+
                         dbMessage.ReciverId = Reciver.Id;
                         db.Messages.Add(dbMessage);
                         db.SaveChanges();
+                        
                     }
                     TempData["SendSucces"] = "Somestuff";
 

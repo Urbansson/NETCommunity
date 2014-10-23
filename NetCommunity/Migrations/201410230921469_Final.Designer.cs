@@ -7,13 +7,13 @@ namespace NetCommunity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class Groups3 : IMigrationMetadata
+    public sealed partial class Final : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Groups3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Final));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410221122351_Groups3"; }
+            get { return "201410230921469_Final"; }
         }
         
         string IMigrationMetadata.Source

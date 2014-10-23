@@ -1,25 +1,26 @@
-﻿@model IEnumerable<NetCommunity.ViewModels.ShowUserMessagesViewModel>
+﻿@model NetCommunity.ViewModels.ShowUserMessagesViewModel
 
 @{
     ViewBag.Title = "Show";
 }
 
-<h2>Messages from @Html.DisplayFor(model => model.First().Sender)</h2>
+<h2>Messages from @Html.DisplayFor(model => model.Sender)</h2>
+
 <table class="table">
     <tr>
 
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Messages.First().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsRead)
+            @Html.DisplayNameFor(model => model.Messages.First().IsRead)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
+            @Html.DisplayNameFor(model => model.Messages.First().Time)
         </th>
         <th></th>
     </tr>
-@foreach (var item in Model) {
+@foreach (var item in Model.Messages) {
     <tr>
 
         <td>
@@ -39,6 +40,9 @@
 }
 
 </table>
+
+<p>@Html.DisplayNameFor(model => model.TotalMessages): @Html.DisplayFor(model => model.TotalMessages), @Html.DisplayNameFor(model => model.ReadMessages): @Html.DisplayFor(model => model.ReadMessages), @Html.DisplayNameFor(model => model.DeletedMessages): @Html.DisplayFor(model => model.DeletedMessages)</p>
+
 <p>
      @Html.ActionLink("Back to Users", "Index", new { @class = "btn btn-default" })
 </p>

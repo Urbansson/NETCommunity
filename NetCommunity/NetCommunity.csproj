@@ -212,9 +212,9 @@
     <Compile Include="Migrations\201410221111530_Groups2.Designer.cs">
       <DependentUpon>201410221111530_Groups2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410221122351_Groups3.cs" />
-    <Compile Include="Migrations\201410221122351_Groups3.Designer.cs">
-      <DependentUpon>201410221122351_Groups3.cs</DependentUpon>
+    <Compile Include="Migrations\201410230921469_Final.cs" />
+    <Compile Include="Migrations\201410230921469_Final.Designer.cs">
+      <DependentUpon>201410230921469_Final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -230,7 +230,7 @@
     <Compile Include="ViewModels\SendMessageViewModel.cs" />
     <Compile Include="ViewModels\DisplayMessageViewModel.cs" />
     <Compile Include="ViewModels\SendSuccessViewModel.cs" />
-    <Compile Include="ViewModels\ShowUserMessagesVievModel.cs" />
+    <Compile Include="ViewModels\ShowUserMessagesViewModel.cs" />
     <Compile Include="ViewModels\UserMessagesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -340,8 +340,8 @@
     <EmbeddedResource Include="Migrations\201410221111530_Groups2.resx">
       <DependentUpon>201410221111530_Groups2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410221122351_Groups3.resx">
-      <DependentUpon>201410221122351_Groups3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410230921469_Final.resx">
+      <DependentUpon>201410230921469_Final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
