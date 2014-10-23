@@ -37,7 +37,6 @@ namespace NetCommunity.Models
         public ApplicationUser()
         {
             NrOfLogins = new List<Login>();
-            //RecivedMessages = new List<Message>();
             SentMessages = new List<Message>();
             RecivedMessages = new List<Message>();
             Groups = new List<Group>();
@@ -50,7 +49,7 @@ namespace NetCommunity.Models
             : base("NetCommunityContext", throwIfV1Schema: false)
         {
             //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
-            //Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
 
         }
 

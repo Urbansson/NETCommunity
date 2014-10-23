@@ -11,7 +11,9 @@ namespace NetCommunity.Models
     {
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
+        [Required]
         public String Name { get; set; }
+        [Required]
         public String Description { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
         public Group()

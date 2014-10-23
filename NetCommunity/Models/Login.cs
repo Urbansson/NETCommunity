@@ -10,8 +10,9 @@ namespace NetCommunity.Models
     {
         [Key]
         public int Id { get; set; } // Id for Entity Framework and database
+        [Required]
         public DateTime LoginTime { get; set; }
-        // Navigation property
+        // Navigation propertyS
         public virtual ApplicationUser User { get; set; }
 
     }

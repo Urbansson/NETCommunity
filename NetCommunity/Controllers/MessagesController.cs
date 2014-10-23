@@ -114,11 +114,13 @@ namespace NetCommunity.Controllers
             {
                 return RedirectToAction("Index");
             }
+            if (Message.IsRead == false)
+            {
+                Reciver.ReadMessages += 1;
+                Message.IsRead = true;
+                db.SaveChanges();
 
-            Reciver.ReadMessages += 1;
-            Message.IsRead = true;
-            db.SaveChanges();
-
+            }
             DisplayMessageViewModel MessageView = new DisplayMessageViewModel();
             MessageView.Sender = Message.Sender.UserName;
             MessageView.Title = Message.Title;
